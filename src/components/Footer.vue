@@ -40,12 +40,11 @@
                 <li><a href="">加入我们</a></li>
               </ul>
             </b-col>
-            
           </b-row>
         </b-col>
-        <b-col md="4" class="py-3">
+        <b-col md="4" class="py-4">
           <dl>
-            <dt></dt>
+            <dt id="hotline"></dt>
             <dd>客服热线<br/>4008-220-220 ( 9:00 - 24:00 )</dd>
           </dl>
         </b-col>
@@ -55,7 +54,15 @@
         <b-col cols="12">
           <ul class="list-inline">
             <li>Copyright © 2016 iqianduan.com, All Rights Reserved 版权所有</li>
-            <li>北京前端教育科技有限公司　京ICP备123456号-1 京公网安备110180201608号</li>
+          </ul>
+        </b-col>
+      </b-row>
+      <b-row class="text-center">
+        <b-col cols="12">
+          <ul class="list-inline">
+            <li class="list-inline-item">北京前端教育科技有限公司</li>
+            <li class="list-inline-item">京ICP备123456号-1</li>
+            <li class="list-inline-item">京公网安备110180201608号</li>
           </ul>
         </b-col>
       </b-row>
@@ -70,5 +77,11 @@ export default {
 </script>
 
 <style>
-
+#hotline{
+  float: left;
+  width: 40px;
+  height: 39px;
+  background: url('~@/assets/images/iconlist.png') no-repeat 0 -410px;
+  margin: 6px 10px 0 0;
+}
 </style>

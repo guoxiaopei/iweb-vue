@@ -7,6 +7,10 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(BootstrapVue); //在全局注册组件
 
+//引入axios
+import { axios_instance } from "./util/axios";
+Vue.prototype.$axios = axios_instance;
+
 
 //是否为线上环境，开发环境为false，上线应改为true。
 Vue.config.productionTip = false

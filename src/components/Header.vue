@@ -2,7 +2,7 @@
   <b-container fluid class="bg-success">
     <b-container>
       <b-navbar toggleable="sm" type="dark" variant="success">
-        <b-navbar-brand href="#">首页</b-navbar-brand>
+        <b-navbar-brand :to="{path: '/'}">首页</b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -12,8 +12,8 @@
             <b-nav-item href="#">基础课程</b-nav-item>
             <b-nav-item href="#">核心课程</b-nav-item>
             <b-nav-item href="#">进阶课程</b-nav-item>
-            <b-nav-item href="#">名师堂</b-nav-item>
-            <b-nav-item href="#">校区</b-nav-item>
+            <b-nav-item href="#/teacher">名师堂</b-nav-item>
+            <b-nav-item to="/address">校区</b-nav-item>
           </b-navbar-nav>
 
           <!-- Right aligned nav items -->
