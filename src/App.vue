@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :key="Key">
     <Header></Header>
     <router-view></router-view>
     <Footer></Footer>
@@ -16,6 +16,19 @@ export default {
   components: {
     Header,
     Footer
+  },
+  data() {
+    return {
+      Key: "" //监听URL变化（解决路由不变，参数变，但页面不刷新的问题）
+    }
+  },
+  watch: {
+    $route: function(newUrl, oldUrl) {
+      //路由（包括参数）发生变化时，对key进行赋值
+      //如果key发生了变化，则页面执行刷新
+      this.Key = new Date().getTime();
+      console.log(newUrl, oldUrl);
+    }
   }
 }
 </script>
