@@ -23,8 +23,10 @@
               <template v-slot:button-content>
                 <em>用户</em>
               </template>
-              <b-dropdown-item href="#">用户中心</b-dropdown-item>
-              <b-dropdown-item href="#">退出</b-dropdown-item>
+              <b-dropdown-item v-if="$global.isLogin == false" :to="{path: '/register'}">注册</b-dropdown-item>
+              <b-dropdown-item v-if="$global.isLogin == false" :to="{path: '/login'}">登陆</b-dropdown-item>
+              <b-dropdown-item v-if="$global.isLogin == true" href="#">用户中心</b-dropdown-item>
+              <b-dropdown-item v-if="$global.isLogin == true" @click="logout" href="#">退出</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
 
@@ -36,7 +38,14 @@
 
 <script>
 export default {
-  name: "Header"
+  name: "Header",
+  methods: {
+    logout() {
+      sessionStorage.removeItem('uid');
+      sessionStorage.removeItem('uname');
+      location.reload();
+    }
+  }
 }
 </script>
 

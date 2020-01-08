@@ -3,6 +3,8 @@ import Teacher from "../pages/Teacher";
 import Address from "../pages/Address";
 import Course from "../pages/Course";
 import CourseDetail from "../pages/CourseDetail";
+import Register from "../pages/Register";
+import Login from "../pages/Login";
 
 export const routes = [
   {
@@ -29,5 +31,15 @@ export const routes = [
     path: "/course_detail",
     name: "CourseDetail",
     component: CourseDetail
+  },
+  {
+    path: "/register",
+    name: "Register",
+    component: Register
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: Login
   }
 ]

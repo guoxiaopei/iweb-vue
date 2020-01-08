@@ -4,14 +4,14 @@
       <b-col cols="12">
         <h2 class="d-flex justify-content-between page-header my-3">
           <span>{{hname}}</span>
-          <router-link to="">更多</router-link>
+          <router-link :to="{name: 'Course', query: {curPage:1,typeId:0}}">更多</router-link>
         </h2>
       </b-col>
       <b-col sm="6" md="3" v-for="(item,i) of list" :key="i">
-        <router-link to="">
+        <router-link :to="{name: 'CourseDetail', query: {cid: item.cid}}">
           <img :src="require('../assets/' + item.pic)" alt="" class="w-100 my-3">
         </router-link>
-        <router-link to="">
+        <router-link :to="{name: 'CourseDetail', query: {cid: item.cid}}">
           <h6>{{item.title}}</h6>
         </router-link>
         <div>讲师：{{item.tname}}</div>

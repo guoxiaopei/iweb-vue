@@ -12,14 +12,24 @@
           <li>开课时间：{{detail.startTime}}</li>
           <li>上课地点：{{detail.address}}</li>
         </ul>
-        <h6>课程价格：{{detail.price}}.00</h6>
-        <b-button>加入购物车</b-button>
-        <a href="">加入收藏</a>
+        <div>
+          课程价格：
+          <h5 class="text-danger d-inline-block mb-3">￥{{detail.price}}.00</h5>
+        </div>
+        <router-link to="" class="btn btn-warning text-white">
+          <em class="icon-cart"></em>
+          加入购物车
+        </router-link>
+        <a class="btn btn-secondary ml-3" href="">加入收藏</a>
       </b-col>
     </b-row>
-    <h2>课程详情</h2>
-    <hr>
-    <p v-html="detail.details"></p>
+    <b-row>
+      <b-col cols="12">
+        <h2><span>课程详情</span></h2>
+        <hr>
+        <div v-html="detail.details"></div>
+      </b-col>
+    </b-row>
   </b-container>
 </template>
 
@@ -36,7 +46,7 @@ export default {
     getCourseDetail() {
       this.$axios.get("/course/detail",{
         params: {
-          cid: 1
+          cid: this.$route.query.cid
         }
       }).then(res => {
         console.log(res)
@@ -54,5 +64,13 @@ export default {
 </script>
 
 <style>
-
+.icon-cart {
+    display: inline-block;
+    vertical-align: middle;
+    width:19px;
+    height: 14px;
+    background: url(../assets/images/iconlist.png) no-repeat 0 -210px;
+    margin-right: 9px;
+    margin-top:-4px;
+}
 </style>

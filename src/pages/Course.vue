@@ -5,12 +5,16 @@
     <hr style="borderTop: 1px solid #b2ee86">
     <b-row class="mb-5" v-for="(item, index) in list" :key="index">
       <b-col cols="3">
-        <router-link to="">
+        <router-link :to="{name: 'CourseDetail', query: {cid: item.cid}}">
           <img :src="require(`../assets/${item.pic}`)" alt="" class="img-fluid">
         </router-link>
       </b-col>
       <b-col cols="5" class="course-desc">
-        <h2>{{item.title}}</h2>
+        <h2>
+          <router-link :to="{name: 'CourseDetail', query: {cid: item.cid}}">
+            {{item.title}}
+          </router-link>
+        </h2>
         <p>讲师: {{item.tname}}</p>
         <p>课时: {{item.cLength}}</p>
         <p>开课时间: {{item.startTime}}</p>
@@ -20,7 +24,7 @@
         <h2 class="text-danger my-5">￥{{item.price}}.00</h2>
       </b-col>
       <b-col cols="2">
-        <router-link :to="{name:'CourseDetail',query:{cid:1}}" class="btn btn-success my-5">查看详情</router-link>
+        <router-link :to="{name: 'CourseDetail', query: {cid: item.cid}}" class="btn btn-success my-5">查看详情</router-link>
       </b-col>
     </b-row>
     <!-- 分页导航 -->
