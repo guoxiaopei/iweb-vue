@@ -23,8 +23,8 @@
                         </li>
                     </ul>
                     <div class="sum clearfloat" v-show="$global.isLogin">
-                        <p>共计：<span>¥1298.00</span></p>
-                        <a href="">去结算</a>
+                        <p>共计：<span>¥{{count}}.00</span></p>
+                        <router-link :to="{name: 'Cart'}">去结算</router-link>
                     </div>
                 </div>
             </div>
@@ -68,6 +68,15 @@ export default {
   },
   mounted() {
     this.getCart();
+  },
+  computed: {
+    count() {
+      var num=0;
+      for(var i=0; i<this.list.length; i++) {
+        num += this.list[i].price;
+      }
+      return num;
+    }
   }
 
 }
