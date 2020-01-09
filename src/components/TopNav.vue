@@ -6,7 +6,7 @@
                 <input type="text" placeholder="课程搜索"/><button type="button"></button>
             </div>
             <div class="h_cart">
-                <a href="cart.html"><em class="icon-cart"></em>我的购物车(<strong id="cart_sum">0</strong>)<em class="icon-arrows"></em></a>
+                <a href="cart.html"><em class="icon-cart"></em>我的购物车(<strong id="cart_sum">{{list.length}}</strong>)<em class="icon-arrows"></em></a>
                 <div class="cart_dropdown">
                     <h3 v-show="!$global.isLogin">请登录后查看您的购物车</h3>
                     <h3 v-show="$global.isLogin && list.length == 0">您的购物车为空~</h3>
@@ -19,7 +19,7 @@
                                 <dt><a href="">HTML零基础入门零基础入门零基础入门</a></dt>
                                 <dd>¥{{item.price}}.00 <span>x {{item.count}}</span></dd>
                             </dl>
-                            <em class="icon-remove"></em>
+                            <em class="icon-remove" @click="remove(item.ctid, index)"></em>
                         </li>
                     </ul>
                     <div class="sum clearfloat" v-show="$global.isLogin">
@@ -42,12 +42,25 @@ export default {
     }
   },
   methods: {
-    getCart() {
+    getCart () {
       this.$axios.post("/cart/list", qs.stringify({
         uid: sessionStorage.getItem('uid')
       })).then(res => {
         console.log(res)
         this.list = res.data.data;
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    remove (id, i) {
+      console.log(id, i)
+      this.$axios.post('/cart/delete', qs.stringify({
+        ctid: id
+      })).then(res => {
+        console.log(res)
+        if(res.data.code == 200) {
+          this.list.splice(i,1)
+        }
       }).catch(err => {
         console.log(err)
       })
@@ -178,6 +191,7 @@ a:hover {
 .cart_dropdown ul li {
     padding: 16px 0 16px 10px;
     border-bottom: 1px dotted #ddd;
+    height: 70px;
 }
 .cart_dropdown ul li>a,.cart_dropdown ul li>dl {
     float: left;

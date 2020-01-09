@@ -16,11 +16,11 @@
           课程价格：
           <h5 class="text-danger d-inline-block mb-3">￥{{detail.price}}.00</h5>
         </div>
-        <span class="btn btn-warning text-white">
+        <span class="btn btn-warning text-white" @click="addCart">
           <em class="icon-cart"></em>
           加入购物车
         </span>
-        <a class="btn btn-secondary ml-3" href="">加入收藏</a>
+        <a class="btn btn-secondary ml-3" @click="addFavorite">加入收藏</a>
       </b-col>
     </b-row>
     <b-row>
@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import qs from 'qs'
 export default {
   name: "CourseDetail",
   data() {
@@ -55,6 +56,44 @@ export default {
       }).catch(err => {
         console.error(err)
       })
+    },
+    addCart() {
+      if(this.$global.isLogin) {
+        this.$axios.post('/cart/add', qs.stringify({
+          userId: this.$global.uid,
+          courseId: this.detail.cid,
+          count: 1
+        })).then(res => {
+          console.log(res)
+          if(res.data.code == 200) {
+            alert("添加成功")
+          } else {
+            alert("error,稍后再试")
+          }
+        }).catch(err => {
+          console.log(err)
+        })
+      } else {
+        alert('去登陆，再加购');
+        this.$router.push('/login')
+      }
+    },
+    addFavorite() {
+      if(this.$global.isLogin) {
+        this.$axios.post('/favorite/add', qs.stringify({
+          uid: sessionStorage.getItem('uid'),
+          cid: this.$route.query.cid
+        })).then(res => {
+          if(res.data.code == 200) {
+            alert('收藏成功')
+          } else if(res.data.code == 201) {
+            alert('已收藏')
+          }
+        })
+      } else {
+        alert('去登陆，再收藏');
+        this.$router.push('/login')
+      }
     }
   },
   mounted() {
