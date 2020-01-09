@@ -1,5 +1,6 @@
 <template>
   <div id="app" :key="Key">
+    <TopNav></TopNav>
     <Header></Header>
     <router-view></router-view>
     <Footer></Footer>
@@ -7,6 +8,7 @@
 </template>
 
 <script>
+import TopNav from './components/TopNav';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { router } from './route/router';
@@ -15,7 +17,8 @@ export default {
   router,
   components: {
     Header,
-    Footer
+    Footer,
+    TopNav
   },
   data() {
     return {

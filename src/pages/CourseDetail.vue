@@ -16,10 +16,10 @@
           课程价格：
           <h5 class="text-danger d-inline-block mb-3">￥{{detail.price}}.00</h5>
         </div>
-        <router-link to="" class="btn btn-warning text-white">
+        <span class="btn btn-warning text-white">
           <em class="icon-cart"></em>
           加入购物车
-        </router-link>
+        </span>
         <a class="btn btn-secondary ml-3" href="">加入收藏</a>
       </b-col>
     </b-row>
