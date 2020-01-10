@@ -3,7 +3,7 @@
     <div class="cart">
       <div class="cart_header">
         <a href="" class="cart_delete">删除</a>
-        <a href="" class="cart_clear">清空购物车</a>
+        <a href="javascript:;" class="cart_clear" @click="cartEmpty">清空购物车</a>
         <span>已选课程<em>0</em>门</span>
         <span>总金额：<strong>0.00</strong></span>
         <button type="button" class="pay">结算</button>
@@ -18,29 +18,18 @@
           <span>操作</span>
         </div>
         <div class="cartcon_list">
-          <h2>请登录后查看您的购物车 <a href="login.html">去登录</a></h2>
-          <h2>购物车中没有任何课程！<a href="product.html">查看全部课程</a></h2>
+          <h2 v-show="!$global.isLogin">请登录后查看您的购物车 <a href="login.html">去登录</a></h2>
+          <h2 v-if="list.length==0">购物车中没有任何课程！<a href="product.html">查看全部课程</a></h2>
           <ul class="list-unstyled">
-            <li class="clearfloat">
+            <li class="clearfloat" v-for="(item, index) in list" :key="index">
               <span><input type="checkbox" class="cart_checkbox"/></span>
-              <a href="" class="cart_img"><img src="@/assets/img-course/01.png" alt=""/></a>
-              <a href="" class="cart_title">HTML5基础入门</a>
-              <i>¥1599</i>
+              <a href="" class="cart_img"><img :src="require(`@/assets/${item.pic}`)" alt=""/></a>
+              <a href="" class="cart_title">{{item.title}}</a>
+              <i>¥{{item.price}}</i>
               <div>
-                <span>-</span><input type="text" value="2"/><span>+</span>
+                <span>-</span><input type="text" :value="item.count"/><span>+</span>
               </div>
-              <strong>¥1599.00</strong>
-              <em></em>
-            </li>
-            <li class="clearfloat">
-              <span><input type="checkbox" class="cart_checkbox"/></span>
-              <a href="" class="cart_img"><img src="@/assets/img-course/02.png" alt=""/></a>
-              <a href="" class="cart_title">JavaScript核心知识讲解</a>
-              <i>¥1599</i>
-              <div>
-                <span>-</span><input type="text" value="2"/><span>+</span>
-              </div>
-              <strong>¥1599.00</strong>
+              <strong>¥{{item.price * item.count}}</strong>
               <em></em>
             </li>
           </ul>
@@ -59,8 +48,43 @@
 </template>
 
 <script>
+import qs from 'qs'
 export default {
-  name: 'Cart'
+  name: 'Cart',
+  data () {
+      return {
+          list: ''
+      }
+  },
+  methods: {
+      cartEmpty () {
+          if (confirm('确认清空购物车嘛')) {
+              this.$axios.post('/cart/empty', qs.stringify({
+                uid: sessionStorage.getItem('uid')
+              })).then(res => {
+                  console.log(res)
+                  if (res.data.code == 200) {
+                    console.log('删除成功')
+                  } else {
+                    console.log('删除失败')
+                  }
+              })
+          }
+      },
+      getCart () {
+      this.$axios.post("/cart/list", qs.stringify({
+        uid: sessionStorage.getItem('uid')
+      })).then(res => {
+        console.log(res)
+        this.list = res.data.data;
+      }).catch(err => {
+        console.log(err)
+      })
+    }
+  },
+  mounted () {
+      this.getCart();
+  }
 }
 </script>
 
