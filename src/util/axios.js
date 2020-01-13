@@ -2,7 +2,8 @@ import axios from "axios";
 
 //导出包含axios配置的实例
 export const axios_instance = axios.create({
-  baseURL: "http://127.0.0.1:5050",
+  baseURL: "http://127.0.0.1:5050", //本地接口地址
+  // baseURL: "https://iiwebapi.applinzi.com",
   headers: {
     "Content-Type": "application/x-www-form-urlencoded"
   }

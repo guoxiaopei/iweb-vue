@@ -6,6 +6,7 @@ import CourseDetail from "../pages/CourseDetail";
 import Register from "../pages/Register";
 import Login from "../pages/Login";
 import Cart from "../pages/Cart";
+import UserCenter from "../pages/user/Center";
 
 export const routes = [
   {
@@ -47,5 +48,10 @@ export const routes = [
     path: "/cart",
     name: "Cart",
     component: Cart
+  },
+  {
+    path: "/user_center",
+    name: "UserCenter",
+    component: UserCenter
   }
 ]

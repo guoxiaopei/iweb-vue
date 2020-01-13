@@ -25,7 +25,7 @@
               </template>
               <b-dropdown-item v-if="$global.isLogin == false" :to="{path: '/register'}">注册</b-dropdown-item>
               <b-dropdown-item v-if="$global.isLogin == false" :to="{path: '/login'}">登陆</b-dropdown-item>
-              <b-dropdown-item v-if="$global.isLogin == true" href="#">用户中心</b-dropdown-item>
+              <b-dropdown-item v-if="$global.isLogin == true" :to="{path: '/user_center'}">用户中心</b-dropdown-item>
               <b-dropdown-item v-if="$global.isLogin == true" @click="logout" href="#">退出</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
